@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
@@ -39,11 +40,13 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Image> images;
 
-    @ElementCollection//(fetch = FetchType.EAGER)
+    @ElementCollection
     private Set<String> tags = new HashSet<>();
 
     public Post(String title) {
